@@ -1,6 +1,6 @@
 # Godot Boids (.gd)
 Simple boids simulation project done with the Godot 4.5.2 game engine
-![Game](docs/demonstration.gif)
+![Game](Docs/demonstration.gif)
 ## How do boids work?
 Boids are simple position vectors that follow 3 rules:
 1. Alignment
