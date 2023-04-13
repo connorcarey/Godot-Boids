@@ -1,11 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://b11twcy7pyup1"]
+[gd_scene load_steps=4 format=3 uid="uid://b11twcy7pyup1"]
 
 [ext_resource type="Script" path="res://Scripts/Game.gd" id="1_1kx0j"]
-
-[sub_resource type="Environment" id="Environment_6bwa6"]
-background_mode = 3
-glow_enabled = true
-glow_hdr_threshold = 1.5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d8slr"]
 content_margin_top = 16.0
@@ -19,9 +14,6 @@ bg_color = Color(0.266667, 0.278431, 0.352941, 1)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_1kx0j")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_6bwa6")
 
 [node name="Background" type="ColorRect" parent="."]
 color = Color(0.156863, 0.164706, 0.211765, 1)
