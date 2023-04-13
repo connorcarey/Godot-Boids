@@ -1,13 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bi83nt1a4c663"]
+[gd_scene load_steps=4 format=3 uid="uid://b72k0njq2y64q"]
 
-[ext_resource type="Script" path="res://Scenes/boid.gd" id="1_3s55r"]
 [ext_resource type="Texture2D" uid="uid://c7it4k7620r5k" path="res://Assets/Spaceship.png" id="1_ic1hn"]
+[ext_resource type="Script" path="res://Scripts/boid.gd" id="1_qibse"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rfsxy"]
 radius = 0.01
 
 [node name="Boid" type="Area2D"]
-script = ExtResource("1_3s55r")
+script = ExtResource("1_qibse")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false

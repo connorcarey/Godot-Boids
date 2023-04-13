@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2u1lgx3exi2w"]
+[gd_scene load_steps=5 format=3 uid="uid://b11twcy7pyup1"]
 
-[ext_resource type="Script" path="res://Game.gd" id="1_1upg2"]
+[ext_resource type="Script" path="res://Scripts/Game.gd" id="1_1kx0j"]
 
 [sub_resource type="Environment" id="Environment_6bwa6"]
 background_mode = 3
@@ -18,7 +18,7 @@ content_margin_bottom = 16.0
 bg_color = Color(0.266667, 0.278431, 0.352941, 1)
 
 [node name="Game" type="Node2D"]
-script = ExtResource("1_1upg2")
+script = ExtResource("1_1kx0j")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_6bwa6")
