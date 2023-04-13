@@ -7,7 +7,7 @@ Boids are simple position vectors that follow 3 rules:
 2. Separation
 3. Cohesion
 
-All of these rules applies varying forces on each boid that accelerates each position vector to reach a maximum velocity.
+All of these rules apply varying forces on each boid that accelerate each position vector to reach a maximum velocity.
 More information on boids and their applications can be found [here](http://www.red3d.com/cwr/boids/)
 ## How to download
 All official releases are located [here](https://github.com/cornball24/Godot-Boids/tags), as of now it is strictly in alpha testing.
