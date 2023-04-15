@@ -10,14 +10,14 @@ func _ready():
 	boid_scene = load("res://Scenes/boid.tscn")
 	resize_window()
 	
-	for i in GlobalVariables.count : 
+	for i in GlobalVariables.Count : 
 		spawn_boid()
 	
-	$CanvasLayer/Options/VBoxContainer/SliderContainer/AlignmentSlider.set_value_no_signal(GlobalVariables.alignment)
-	$CanvasLayer/Options/VBoxContainer/SliderContainer/CohesionSlider.set_value_no_signal(GlobalVariables.cohesion)
-	$CanvasLayer/Options/VBoxContainer/SliderContainer/SeparationSlider.set_value_no_signal(GlobalVariables.separation)
-	$CanvasLayer/Options/VBoxContainer/SliderContainer/SpeedSlider.set_value_no_signal(GlobalVariables.max_speed)
-	$CanvasLayer/Options/VBoxContainer/SliderContainer/CountSlider.set_value_no_signal(GlobalVariables.count)
+	$CanvasLayer/Options/VBoxContainer/SliderContainer/AlignmentSlider.set_value_no_signal(GlobalVariables.Alignment)
+	$CanvasLayer/Options/VBoxContainer/SliderContainer/CohesionSlider.set_value_no_signal(GlobalVariables.Cohesion)
+	$CanvasLayer/Options/VBoxContainer/SliderContainer/SeparationSlider.set_value_no_signal(GlobalVariables.Separation)
+	$CanvasLayer/Options/VBoxContainer/SliderContainer/SpeedSlider.set_value_no_signal(GlobalVariables.MaxSpeed)
+	$CanvasLayer/Options/VBoxContainer/SliderContainer/CountSlider.set_value_no_signal(GlobalVariables.Count)
 
 func resize_window() -> void:
 	width = get_viewport().size.x
@@ -35,27 +35,27 @@ func _process(delta):
 	if get_viewport().size.x != width || get_viewport().size.y != height :
 		resize_window
 	
-	while $BoidContainer.get_child_count() < GlobalVariables.count :
+	while $BoidContainer.get_child_count() < GlobalVariables.Count :
 		spawn_boid()
-	while $BoidContainer.get_child_count() > GlobalVariables.count :
+	while $BoidContainer.get_child_count() > GlobalVariables.Count :
 		$BoidContainer.get_children().pop_back().free()
 
 
 func _on_alignment_slider_value_changed(value):
-	GlobalVariables.alignment = value
+	GlobalVariables.Alignment = value
 
 
 func _on_cohesion_slider_value_changed(value):
-	GlobalVariables.cohesion = value
+	GlobalVariables.Cohesion = value
 
 
 func _on_separation_slider_value_changed(value):
-	GlobalVariables.separation = value
+	GlobalVariables.Separation = value
 
 
 func _on_speed_slider_value_changed(value):
-	GlobalVariables.max_speed = value
+	GlobalVariables.MaxSpeed = value
 
 
 func _on_count_slider_value_changed(value):
-	GlobalVariables.count = value
+	GlobalVariables.Count = value

@@ -12,6 +12,7 @@ public partial class boid : Area2D
 	{
 		Velocity = new Vector2(0, 0);
 		Acceleration = new Vector2(0, 0);
+		GetNode("CollisionCircle").Set("radius", GlobalVariables.Radius);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
