@@ -4,92 +4,92 @@ using System;
 public partial class boid : Area2D
 {
 
-	Vector2 velocity;
-	Vector2 acceleration;
+	public Vector2 Velocity;
+	public Vector2 Acceleration;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		velocity = new Vector2(0, 0);
-		acceleration = new Vector2(0, 0);
+		Velocity = new Vector2(0, 0);
+		Acceleration = new Vector2(0, 0);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		wrapPosition();
-		updateAcceleration();
-		velocity += acceleration;G
-		velocity = velocity.clamped((GDScript)Guid.Load("res://Scripts/GlobalVariables.gd").max_speed);
-		position += velocity;
-		rotation = velocity.angle();
+		WrapPosition();
+		UpdateAcceleration();
+		Velocity += Acceleration;
+		Velocity = Velocity.LimitLength(GlobalVariables.MaxSpeed);
+		Position += Velocity;
+		Rotation = Velocity.Angle();
 	}
 
-	private void wrapPosition()
+	private void WrapPosition()
 	{
-		int width = getWidth();
-		int height = getHeight();
+		float Width = GetViewportRect().Size.X;
+		float Height = GetViewportRect().Size.Y;
 
-		if (position.x > width) {
-			position.x = 0;
-		} else if (position.x < 0) {
-			position.x = width;
+		if (Position.X > Width) {
+			Position.X = 0;
+		} else if (Position.X < 0) {
+			Position.X = Width;
 		}
 
-		if(position.y > height) {
-			position.y = 0;
-		} else if (position.y < 0) {
-			position.y = height;
+		if(Position.Y > Height) {
+			Position.Y = 0;
+		} else if (Position.Y < 0) {
+			Position.Y = Height;
 		}
 	}
 
-	public void updateAcceleration()
+	public void UpdateAcceleration()
 	{
-		Vector2 separate = new Vector2(0, 0);
-		Vector2 cohesion = new Vector2(0, 0);
-		Vector2 alignment = new Vector2(0, 0);
-		int total = 0;
+		Vector2 Separate = new Vector2(0, 0);
+		Vector2 Cohesion = new Vector2(0, 0);
+		Vector2 Alignment = new Vector2(0, 0);
+		int Total = 0;
 
-		foreach (Area2D area in getOverlappingAreas()) {
+		foreach (Area2D Area in GetOverlappingAreas()) {
 			// Separation
-			float sepdiff = position - area.position;
-			float dist = position.distanceSquaredTo(area);
-			sepdiff /= dist;
-			separate += sepDiff;
+			Vector2 SepDiff = Position - Area.Position;
+			float dist = Position.DistanceSquaredTo(Area.Position);
+			SepDiff /= dist;
+			Separate += SepDiff;
 			// Cohesion
-			cohesion += area.position;
+			Cohesion += Area.Position;
 			// Alignment
-			alignment += area.velocity;
+			Alignment += Area.Velocity;
 			
-			total++;
+			Total++;
 		}
 
-		if (total == 0) {
+		if (Total == 0) {
 			return;
 		}
 
-		Vector2 force = new Vector2(0, 0);
+		Vector2 Force = new Vector2(0, 0);
 		// Separation
-		separate /= total;
-		separate = separate.normalized() * GlobalVariables.max_speed;
-		force = separate - velocity;
-		force = force.clamped(GlobalVaribles.max_force);
-		force *= GlobalVariables.separation;
-		acceleration += force;
+		Separate /= Total;
+		Separate = Separate.Normalized() * GlobalVariables.MaxSpeed;
+		Force = Separate - Velocity;
+		Force = Force.LimitLength(GlobalVariables.MaxForce);
+		Force *= GlobalVariables.Separation;
+		Acceleration += Force;
 		// Cohesion
-		cohesion /= total;
-		Vector2 target = cohesion - position;
-		target = target.normalized() * GlobalVariables.max_speed;
-		force = target - velocity;
-		force = force.clamped(GlobalVaribles.max_force);
-		force *= GlobalVaribles.cohesion;
-		acceleration += force;
+		Cohesion /= Total;
+		Vector2 Target = Cohesion - Position;
+		Target = Target.Normalized() * GlobalVariables.MaxSpeed;
+		Force = Target - Velocity;
+		Force = Force.LimitLength(GlobalVariables.MaxForce);
+		Force *= GlobalVariables.Cohesion;
+		Acceleration += Force;
 		// Alignment
-		alignment /= total;
-		alignment = alignment.normalized() * GlobalVariables.max_speed;
-		force = alignment - velocity;
-		force = force.clamped(GlobalVaribles.max_force);
-		force *= GlobalVariables.alignment;
-		acceleration += force;
+		Alignment /= Total;
+		Alignment = Alignment.Normalized() * GlobalVariables.MaxSpeed;
+		Force = Alignment - Velocity;
+		Force = Force.LimitLength(GlobalVariables.MaxForce);
+		Force *= GlobalVariables.Alignment;
+		Acceleration += Force;
 	}
 }
