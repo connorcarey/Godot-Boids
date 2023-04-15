@@ -29,18 +29,21 @@ public partial class boid : Area2D
 	{
 		float Width = GetViewportRect().Size.X;
 		float Height = GetViewportRect().Size.Y;
+		Vector2 Temp = Position;
 
 		if (Position.X > Width) {
-			Position.X = 0;
+			Temp.X = 0;
 		} else if (Position.X < 0) {
-			Position.X = Width;
+			Temp.X = Width;
 		}
 
 		if(Position.Y > Height) {
-			Position.Y = 0;
+			Temp.Y = 0;
 		} else if (Position.Y < 0) {
-			Position.Y = Height;
+			Temp.Y = Height;
 		}
+
+		Position = Temp;
 	}
 
 	public void UpdateAcceleration()
@@ -59,7 +62,7 @@ public partial class boid : Area2D
 			// Cohesion
 			Cohesion += Area.Position;
 			// Alignment
-			Alignment += Area.Velocity;
+			Alignment += ((boid)Area).Velocity;
 			
 			Total++;
 		}
