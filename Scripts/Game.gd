@@ -8,11 +8,7 @@ var rng = RandomNumberGenerator.new()
 
 func _ready():
 	boid_scene = load("res://Scenes/boid.tscn")
-	var boids = []
-	width = get_viewport().size.x
-	height = get_viewport().size.y
-	$Background.size.x = width
-	$Background.size.y = height
+	resize_window()
 	
 	for i in GlobalVariables.count : 
 		spawn_boid()
@@ -23,7 +19,13 @@ func _ready():
 	$CanvasLayer/Options/VBoxContainer/SliderContainer/SpeedSlider.set_value_no_signal(GlobalVariables.max_speed)
 	$CanvasLayer/Options/VBoxContainer/SliderContainer/CountSlider.set_value_no_signal(GlobalVariables.count)
 
-func spawn_boid():
+func resize_window() -> void:
+	width = get_viewport().size.x
+	height = get_viewport().size.y
+	$Background.size.x = width
+	$Background.size.y = height
+
+func spawn_boid() -> void:
 	var boid = boid_scene.instantiate()
 	$BoidContainer.add_child(boid)
 	boid.position = Vector2(rng.randf_range(0, width), rng.randf_range(0, height))
@@ -31,10 +33,7 @@ func spawn_boid():
 
 func _process(delta):
 	if get_viewport().size.x != width || get_viewport().size.y != height :
-		width = get_viewport().size.x
-		height = get_viewport().size.y
-		$Background.size.x = width
-		$Background.size.y = height
+		resize_window
 	
 	while $BoidContainer.get_child_count() < GlobalVariables.count :
 		spawn_boid()
