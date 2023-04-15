@@ -1,13 +1,30 @@
 [gd_scene load_steps=4 format=3 uid="uid://brqm5crq7afh7"]
 
 [ext_resource type="Texture2D" uid="uid://c7it4k7620r5k" path="res://Assets/Spaceship.png" id="1_ic1hn"]
-[ext_resource type="Script" path="res://Scenes/boid.cs" id="1_kd3kt"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_rla06"]
+script/source = "using Godot;
+using System;
+
+public partial class boid : Area2D
+{
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+	}
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+	}
+}
+"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rfsxy"]
 radius = 0.01
 
 [node name="Boid" type="Area2D"]
-script = ExtResource("1_kd3kt")
+script = SubResource("CSharpScript_rla06")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
