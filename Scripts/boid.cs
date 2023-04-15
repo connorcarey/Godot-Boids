@@ -6,13 +6,15 @@ public partial class boid : Area2D
 
 	public Vector2 Velocity;
 	public Vector2 Acceleration;
+	public GodotObject GlobalVariables;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		Velocity = new Vector2(0, 0);
 		Acceleration = new Vector2(0, 0);
-		GetNode("CollisionCircle").Set("radius", GlobalVariables.Radius);
+		GlobalVariables = GetNode<Node>("/root/GlobalVariables");
+		//GetNode("CollisionCircle").Set("radius", GlobalVariables.Get("radius"));
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -21,7 +23,7 @@ public partial class boid : Area2D
 		WrapPosition();
 		UpdateAcceleration();
 		Velocity += Acceleration;
-		Velocity = Velocity.LimitLength(GlobalVariables.MaxSpeed);
+		Velocity = Velocity.LimitLength((float)GlobalVariables.Get("max_speed"));
 		Position += Velocity;
 		Rotation = Velocity.Angle();
 	}
@@ -75,25 +77,25 @@ public partial class boid : Area2D
 		Vector2 Force = new Vector2(0, 0);
 		// Separation
 		Separate /= Total;
-		Separate = Separate.Normalized() * GlobalVariables.MaxSpeed;
+		Separate = Separate.Normalized() * (float)GlobalVariables.Get("max_speed");
 		Force = Separate - Velocity;
-		Force = Force.LimitLength(GlobalVariables.MaxForce);
-		Force *= GlobalVariables.Separation;
+		Force = Force.LimitLength((float)GlobalVariables.Get("max_force"));
+		Force *= (float)GlobalVariables.Get("separation");
 		Acceleration += Force;
 		// Cohesion
 		Cohesion /= Total;
 		Vector2 Target = Cohesion - Position;
-		Target = Target.Normalized() * GlobalVariables.MaxSpeed;
+		Target = Target.Normalized() * (float)GlobalVariables.Get("max_speed");
 		Force = Target - Velocity;
-		Force = Force.LimitLength(GlobalVariables.MaxForce);
-		Force *= GlobalVariables.Cohesion;
+		Force = Force.LimitLength((float)GlobalVariables.Get("max_force"));
+		Force *= (float)GlobalVariables.Get("cohesion");
 		Acceleration += Force;
 		// Alignment
 		Alignment /= Total;
-		Alignment = Alignment.Normalized() * GlobalVariables.MaxSpeed;
+		Alignment = Alignment.Normalized() * (float)GlobalVariables.Get("max_speed");
 		Force = Alignment - Velocity;
-		Force = Force.LimitLength(GlobalVariables.MaxForce);
-		Force *= GlobalVariables.Alignment;
+		Force = Force.LimitLength((float)GlobalVariables.Get("max_force"));
+		Force *= (float)GlobalVariables.Get("alignment");
 		Acceleration += Force;
 	}
 }
